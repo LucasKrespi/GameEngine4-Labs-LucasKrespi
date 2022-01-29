@@ -12,7 +12,8 @@ public class MovementComponent : MonoBehaviour
     float runSpeed = 10;
     [SerializeField]
     float jumpForce = 5;
-
+    [SerializeField]
+    float aimSensitivity;
     //components
     PlayerController playerController;
     Rigidbody playerRigdbody;
@@ -21,11 +22,17 @@ public class MovementComponent : MonoBehaviour
     //movement references
     Vector2 inputVector2 = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
+    Vector2 lookVector = Vector2.zero;
+
+    [SerializeField]
+    GameObject followTransform;
 
     public readonly int movementXHash = Animator.StringToHash("MovementX");
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
+    public readonly int isFiringHash = Animator.StringToHash("isFiring");
+    public readonly int isReloadingHash = Animator.StringToHash("isReloading");
 
 
     private void Awake()
@@ -41,7 +48,32 @@ public class MovementComponent : MonoBehaviour
 
     void Update()
     {
-        //if (playerController.isJumping) return;
+
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookVector.x * aimSensitivity, Vector3.up);
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookVector.y * aimSensitivity, Vector3.left);
+
+        var angles = followTransform.transform.localEulerAngles;
+        angles.z = 0;
+
+        var angle = followTransform.transform.localEulerAngles.x;
+
+        if(angle > 180 && angle < 300)
+        {
+            angles.x = 300;
+        }
+        else if (angle < 180 && angle > 70)
+        {
+            angles.x = 70;
+        }
+
+        followTransform.transform.localEulerAngles = angles;
+
+        transform.rotation = Quaternion.Euler(0.0f, followTransform.transform.rotation.eulerAngles.y, 0.0f);
+
+
+        followTransform.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
+
+        if (playerController.isJumping) return;
         if (!(inputVector2.magnitude > 0)) moveDirection = Vector3.zero;
 
         moveDirection = transform.forward * inputVector2.y + transform.right * inputVector2.x;
@@ -73,6 +105,27 @@ public class MovementComponent : MonoBehaviour
         playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
     }
 
+    public void OnAinm(InputValue value)
+    {
+        playerController.isAiming = value.isPressed;
+    } 
+    public void OnLook(InputValue value)
+    {
+        lookVector = value.Get<Vector2>();
+    } 
+    public void OnReload(InputValue value)
+    {
+        playerController.isReloading = value.isPressed;
+        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
+
+    } 
+    public void OnFire(InputValue value)
+    {
+        playerController.isFiring = value.isPressed;
+
+        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
+
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;

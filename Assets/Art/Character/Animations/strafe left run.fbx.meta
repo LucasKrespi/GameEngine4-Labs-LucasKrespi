@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 40e511a599160224cb856f62ea9203af
+guid: fd1b924d3a86ac140bac247335169f0f
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: RifleRunForward
+    second: rifleStrafeLeft
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,21 +36,21 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RifleRunForward
+      name: rifleStrafeLeft
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 22
+      lastFrame: 16
       wrapMode: 0
-      orientationOffsetY: -17
+      orientationOffsetY: -45.5
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
