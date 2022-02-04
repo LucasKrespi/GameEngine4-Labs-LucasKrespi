@@ -113,19 +113,6 @@ public class MovementComponent : MonoBehaviour
     {
         lookVector = value.Get<Vector2>();
     } 
-    public void OnReload(InputValue value)
-    {
-        playerController.isReloading = value.isPressed;
-        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
-
-    } 
-    public void OnFire(InputValue value)
-    {
-        playerController.isFiring = value.isPressed;
-
-        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
-
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;

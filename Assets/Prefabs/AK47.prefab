@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1661471856077533162}
+  - component: {fileID: 877012874980409376}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Untagged
@@ -32,6 +33,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &877012874980409376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770664525778282063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8bf59eb2477f743bb0acb9b203f848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripLocationRight: {fileID: 2466664516692293203}
+  gripLocationLeft: {fileID: 2175305935927409076}
+  weaponStats:
+    weaponType: 2
+    firingPattern: 1
+    waeponName: Ak-47
+    damage: 35
+    bulletsInCLip: 30
+    clipSize: 30
+    fireStartDelay: 0
+    fireRate: 0.25
+    fireDistance: 500
+    repeating: 1
+    weaponHitLayers:
+      serializedVersion: 2
+      m_Bits: 2147483647
 --- !u!1001 &6398798926814667243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49,46 +78,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13
+      value: 0.1331
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.021
+      value: -0.0177
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.022
+      value: 0.0347
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.31991452
+      value: 0.37138876
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.37593436
+      value: 0.42252406
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6629055
+      value: 0.63425344
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5629249
+      value: 0.5303455
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -30.384
+      value: -21.033
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 100.793
+      value: 99.971
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 84.44
+      value: 85.058
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+--- !u!4 &2175305935927409076 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5115284890533763167, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+  m_PrefabInstance: {fileID: 6398798926814667243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2466664516692293203 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8860344047792904120, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+  m_PrefabInstance: {fileID: 6398798926814667243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6396047489951422585 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
