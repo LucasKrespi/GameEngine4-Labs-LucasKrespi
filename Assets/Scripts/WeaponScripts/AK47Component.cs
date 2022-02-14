@@ -8,7 +8,12 @@ public class AK47Component : WeaponComponent
     {
         Vector3 hitLocation;
 
-        if(weaponStats.bulletsInCLip > 0 && !isRealoading && !weaponHolder.playerController.isRunning)
+        if (muzzeFlash)
+        {
+            muzzeFlash.Play();
+        }
+
+        if(weaponStats.bulletsInCLip > 0 && !isRealoading)
         {
             base.FireWeapon();
             Ray screenRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
@@ -20,8 +25,10 @@ public class AK47Component : WeaponComponent
 
                 Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1);
             }
-            
-
+        }
+        else if (weaponStats.bulletsInCLip <= 0)
+        {
+            weaponHolder.OnStartReload();
         }
     }
 }

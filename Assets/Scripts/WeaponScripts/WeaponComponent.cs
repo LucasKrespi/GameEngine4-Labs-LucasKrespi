@@ -31,6 +31,7 @@ public struct WeaponStats
     public float fireDistance;
     public bool repeating;
     public LayerMask weaponHitLayers;
+    public int totalBullets;
 }
 public class WeaponComponent : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class WeaponComponent : MonoBehaviour
     public WeaponStats weaponStats;
 
     protected WeaponHolder weaponHolder;
+
+    [SerializeField]
+    protected ParticleSystem muzzeFlash;
 
     public bool isFiring;
     public bool isRealoading;
@@ -72,6 +76,7 @@ public class WeaponComponent : MonoBehaviour
         isFiring = true;
         if (weaponStats.repeating)
         {
+            CancelInvoke(nameof(FireWeapon));
             InvokeRepeating(nameof(FireWeapon), weaponStats.fireStartDelay, weaponStats.fireRate);
         }
         else
@@ -84,10 +89,49 @@ public class WeaponComponent : MonoBehaviour
     {
         isFiring = false;
         CancelInvoke(nameof(FireWeapon));
+
+        if (muzzeFlash && muzzeFlash.isPlaying)
+        {
+            muzzeFlash.Stop();
+        }
     }
 
     protected virtual void FireWeapon()
     {
         weaponStats.bulletsInCLip--;
+    }
+
+
+    public virtual void StartReloadindWeapon()
+    {
+        isRealoading = true;
+        ReloadWeapon();
+    }
+    public virtual void ReloadWeapon()
+    {
+        if (muzzeFlash && muzzeFlash.isPlaying)
+        {
+            muzzeFlash.Stop();
+        }
+
+        int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        if(bulletsToReload < 0)
+        {
+            int tempBullets = (weaponStats.clipSize - weaponStats.bulletsInCLip);
+            weaponStats.bulletsInCLip += tempBullets;
+            weaponStats.totalBullets -= tempBullets;
+        }
+        else
+        {
+            weaponStats.bulletsInCLip = weaponStats.totalBullets;
+            weaponStats.totalBullets = 0;
+        }
+
+    }
+
+
+    public virtual void StopReloading()
+    {
+        isRealoading = false;
     }
 }
