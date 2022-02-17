@@ -14,6 +14,8 @@ public class MovementComponent : MonoBehaviour
     float jumpForce = 5;
     [SerializeField]
     float aimSensitivity;
+
+    
     //components
     PlayerController playerController;
     Rigidbody playerRigdbody;
@@ -33,6 +35,7 @@ public class MovementComponent : MonoBehaviour
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
     public readonly int isFiringHash = Animator.StringToHash("isFiring");
     public readonly int isReloadingHash = Animator.StringToHash("isReloading");
+    public readonly int verticalAinHash = Animator.StringToHash("VerticalAim");
 
 
     private void Awake()
@@ -43,7 +46,10 @@ public class MovementComponent : MonoBehaviour
     }
     void Start()
     {
-        
+        if (!GameManager.instance.cursorActive)
+        {
+            AppEvents.InvokOnMouseCursorEnableEvent(false);
+        }
     }
 
     void Update()
@@ -56,6 +62,25 @@ public class MovementComponent : MonoBehaviour
         angles.z = 0;
 
         var angle = followTransform.transform.localEulerAngles.x;
+
+        float min = -60;
+
+        float max = 70.0f;
+
+        float range = max - min;
+
+        float offsetToZero = 0 - min;
+
+        float aimAngle = followTransform.transform.localEulerAngles.x;
+
+        aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
+
+        float val = (aimAngle + offsetToZero) / (range);
+
+
+        playerAnimator.SetFloat(verticalAinHash, val);
+
+
 
         if(angle > 180 && angle < 300)
         {
@@ -84,6 +109,20 @@ public class MovementComponent : MonoBehaviour
         transform.position += movementDirection;
     }
 
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+        LayerMask layer = LayerMask.GetMask("Ground");
+       
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.1f, layer))
+        {
+            if (gameObject.GetComponent<Rigidbody>().velocity.y > 0) return;
+
+            playerController.isJumping = false;
+
+            playerAnimator.SetBool(isJumpingHash, false);
+        }
+    }
     public void OnMovement(InputValue value)
     {
         inputVector2 = value.Get<Vector2>();
@@ -98,6 +137,8 @@ public class MovementComponent : MonoBehaviour
     }
     public void OnJump(InputValue value)
     {
+        if (playerController.isJumping) return;
+
         playerController.isJumping = value.isPressed;
 
         playerRigdbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
@@ -113,12 +154,12 @@ public class MovementComponent : MonoBehaviour
     {
         lookVector = value.Get<Vector2>();
     } 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;
 
-        playerController.isJumping = false;
+    //    playerController.isJumping = false;
 
-        playerAnimator.SetBool(isJumpingHash,false);
-    }
+    //    playerAnimator.SetBool(isJumpingHash,false);
+    //}
 }
