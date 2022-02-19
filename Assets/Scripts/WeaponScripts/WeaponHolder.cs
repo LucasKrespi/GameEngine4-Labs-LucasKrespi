@@ -135,4 +135,9 @@ public class WeaponHolder : MonoBehaviour
             StartFiring();
         }
     }
+
+    public WeaponComponent ReturnEquippedWeapon()
+    {
+        return equippedWeapon;
+    }
 }

@@ -12,4 +12,24 @@ public class PlayerEvents
     {
         OnWeaponEquipped?.Invoke(weaponComponent);
     }
+
+
+    public delegate void OnTakeDamageEvent(int damage);
+
+    public static event OnTakeDamageEvent OnTakeDamage;
+
+    public static void InvokeOnTakeDamageEvent(int damage)
+    {
+        OnTakeDamage?.Invoke(damage);
+    }
+
+
+    public delegate void OnUSePotEvent(int life);
+
+    public static event OnUSePotEvent OnUsePot;
+
+    public static void InvokeOnOnUSePotEvent(int life)
+    {
+        OnUsePot?.Invoke(life);
+    }
 }

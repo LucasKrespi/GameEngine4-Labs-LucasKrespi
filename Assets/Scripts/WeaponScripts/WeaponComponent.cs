@@ -134,4 +134,9 @@ public class WeaponComponent : MonoBehaviour
     {
         isRealoading = false;
     }
+
+    public void SetExtendedMagSize()
+    {
+        weaponStats.clipSize += 10;
+    }
 }

@@ -522,7 +522,7 @@ AnimatorController:
     m_Mask: {fileID: 31900000, guid: 3f1396dc4510a9e409b27458284ced77, type: 2}
     m_Motions: []
     m_Behaviours: []
-    m_BlendingMode: 0
+    m_BlendingMode: 1
     m_SyncedLayerIndex: -1
     m_DefaultWeight: 1
     m_IKPass: 1
