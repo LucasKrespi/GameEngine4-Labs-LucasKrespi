@@ -123,6 +123,11 @@ public class MovementComponent : MonoBehaviour
             playerAnimator.SetBool(isJumpingHash, false);
         }
     }
+
+    public void OnQuit(InputValue valeu)
+    {
+        Application.Quit();
+    }
     public void OnMovement(InputValue value)
     {
         inputVector2 = value.Get<Vector2>();
