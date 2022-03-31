@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerEvents
 {
     public delegate void OnWeaponEquippedEvent(WeaponComponent weaponComponent);
-    
+
     public static event OnWeaponEquippedEvent OnWeaponEquipped;
 
     public static void InvokOnWeaponEquippedEvent(WeaponComponent weaponComponent)
@@ -14,22 +14,32 @@ public class PlayerEvents
     }
 
 
-    public delegate void OnTakeDamageEvent(int damage);
+    public delegate void OnhealthInitializeEvent(HealthComponent healthComponent);
 
-    public static event OnTakeDamageEvent OnTakeDamage;
+    public static event OnhealthInitializeEvent OnhealthInitialize;
 
-    public static void InvokeOnTakeDamageEvent(int damage)
+    public static void InvokeOnhealthInitializeEvent(HealthComponent healthComponent)
     {
-        OnTakeDamage?.Invoke(damage);
+        OnhealthInitialize?.Invoke(healthComponent);
     }
 
 
-    public delegate void OnUSePotEvent(int life);
+    //public delegate void OnTakeDamageEvent(float damage);
 
-    public static event OnUSePotEvent OnUsePot;
+    //public static event OnTakeDamageEvent TakeDamage;
 
-    public static void InvokeOnOnUSePotEvent(int life)
-    {
-        OnUsePot?.Invoke(life);
-    }
+    //public static void InvokeOnTakeDamageEvent(float damage) 
+    //{
+    //    TakeDamage?.Invoke(damage);
+    //}
+
+
+    //public delegate void OnUSePotEvent(int life);
+
+    //public static event OnUSePotEvent OnUsePot;
+
+    //public static void InvokeOnOnUSePotEvent(int life)
+    //{
+    //    OnUsePot?.Invoke(life);
+    //}
 }

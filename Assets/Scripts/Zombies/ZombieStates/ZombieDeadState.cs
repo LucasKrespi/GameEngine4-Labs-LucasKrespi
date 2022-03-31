@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombieDeadState : ZombieStates
 {
     int movementZHash = Animator.StringToHash("MovementZ");
-    int isDeadHash = Animator.StringToHash("isDead");
+    int isDeadHash = Animator.StringToHash("isDying");
     public ZombieDeadState(ZombieComponent zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
         updateInterval = 0f;

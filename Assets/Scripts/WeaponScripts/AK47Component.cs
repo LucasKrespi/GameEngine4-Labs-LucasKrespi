@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AK47Component : WeaponComponent
 {
+    Vector3 hitLocation;
     protected override void FireWeapon()
     {
-        Vector3 hitLocation;
+      
 
         if (muzzeFlash)
         {
@@ -23,7 +24,9 @@ public class AK47Component : WeaponComponent
                 hitLocation = hit.point;
                 Vector3 hitDirection = hit.point - mainCamera.transform.position;
 
-                Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1);
+                DealDamage(hit);
+
+               //Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1);
             }
         }
         else if (weaponStats.bulletsInCLip <= 0)
@@ -31,4 +34,15 @@ public class AK47Component : WeaponComponent
             weaponHolder.OnStartReload();
         }
     }
-}
+
+    public void DealDamage(RaycastHit hitinfo)
+    {
+        IDamageble damageble = hitinfo.collider.GetComponent<IDamageble>();
+        damageble?.TakeDamage(weaponStats.damage);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(hitLocation, 0.1f);
+    }
+}  
