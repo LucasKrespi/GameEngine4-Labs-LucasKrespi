@@ -7,7 +7,7 @@ public class ItemPickUpComponent : MonoBehaviour
     [SerializeField]
     ItemScript pickUpItem;
 
-    [Tooltip("Manual Everride for drop amount, if left at -1 it will use the amount from the scriptable object")]
+    [Tooltip("Manual Override for drop amount, if left at -1 it will use the amount from the scriptable object")]
     [SerializeField]
     int amount = -1;
 
@@ -41,6 +41,13 @@ public class ItemPickUpComponent : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
+
+        if (playerInventory)
+        {
+            playerInventory.AddItem(itemInstance, amount);
+        }
 
         Destroy(gameObject);
     }

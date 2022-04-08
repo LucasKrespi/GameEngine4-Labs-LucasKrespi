@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AK-420
   m_EditorClassIdentifier: 
   name: AK-420
-  itemCategory: 0
+  itemCategory: 1
   itemPrefab: {fileID: 7770664525778282063, guid: 28880a80f2c43e7478741a0be24ec0e3, type: 3}
   stackable: 0
   maxSize: 1

@@ -23,6 +23,7 @@ public class IconSlot : MonoBehaviour
 
     public void Initialize(ItemScript item)
     {
+        if (!item) return;
         Item = item;
         ItemText.text = Item.name;
         AmountWidget.Initialize(item);

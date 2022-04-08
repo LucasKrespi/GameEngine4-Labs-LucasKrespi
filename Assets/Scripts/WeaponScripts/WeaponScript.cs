@@ -9,13 +9,14 @@ public class WeaponScript : EqquipableScript
 
     public override void UseItem(PlayerController playerController)
     {
-        if (isEquipped)
+        if (equipped)
         {
 
         }
         else
         {
-
+            playerController.weaponHolder.equippeWeapon(this);
+           //PlayerEvents.InvokOnWeaponEquippedEvent(itemPrefab.GetComponent<WeaponComponent>());
         }
 
         base.UseItem(playerController);

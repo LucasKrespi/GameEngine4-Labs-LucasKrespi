@@ -24,21 +24,27 @@ public class WeaponHolder : MonoBehaviour
 
     public bool isFirePressed;
 
+    GameObject spawnedWeapon;
+
+    public AmmoUi weaponAmmoIUi;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocketLocation.transform.position, weaponSocketLocation.transform.rotation, weaponSocketLocation.transform);
+        
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
 
-        equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
 
-        equippedWeapon.Initialize(this);
 
-        PlayerEvents.InvokOnWeaponEquippedEvent(equippedWeapon);
+        //equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
 
-        gripIKTransformRight = equippedWeapon.gripLocationRight;
-        gripIKTransformLeft = equippedWeapon.gripLocationLeft;
+        //equippedWeapon.Initialize(this);
+
+        //PlayerEvents.InvokOnWeaponEquippedEvent(equippedWeapon);
+
+        //gripIKTransformRight = equippedWeapon.gripLocationRight;
+        //gripIKTransformLeft = equippedWeapon.gripLocationLeft;
     }
 
     // Update is called once per frame
@@ -49,6 +55,7 @@ public class WeaponHolder : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
+        if (!equippedWeapon) return;
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
         playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
         playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, gripIKTransformRight.position);
@@ -64,6 +71,7 @@ public class WeaponHolder : MonoBehaviour
     }
     public void OnFire(InputValue value)
     {
+        if (!equippedWeapon) return;
         isFirePressed = value.isPressed;
         if (isFirePressed)
         {
@@ -98,7 +106,7 @@ public class WeaponHolder : MonoBehaviour
     }
     public void OnReload(InputValue value)
     {
-
+        if (!equippedWeapon) return;
         playerController.isReloading = value.isPressed;
         OnStartReload();
 
@@ -139,5 +147,30 @@ public class WeaponHolder : MonoBehaviour
     public WeaponComponent ReturnEquippedWeapon()
     {
         return equippedWeapon;
+    }
+
+    public void equippeWeapon(WeaponScript weaponScript)
+    {
+        if (!weaponScript) return;
+
+        spawnedWeapon = Instantiate(weaponToSpawn, weaponSocketLocation.transform.position, weaponSocketLocation.transform.rotation, weaponSocketLocation.transform);
+        if (!spawnedWeapon) return;
+
+        equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+        PlayerEvents.InvokOnWeaponEquippedEvent(equippedWeapon);
+        equippedWeapon.Initialize(this, weaponScript);
+
+
+
+        gripIKTransformRight = equippedWeapon.gripLocationRight; 
+        gripIKTransformLeft = equippedWeapon.gripLocationLeft;
+
+        weaponAmmoIUi.OnWeaponEquipped(equippedWeapon);
+
+    }
+
+    public void UnEquippeWeapon()
+    {
+
     }
 }

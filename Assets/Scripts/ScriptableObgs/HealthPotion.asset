@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d4ef36c61c53547a9389e648e27f80, type: 3}
+  m_Script: {fileID: 11500000, guid: 279b0a8c73e8043438eafc6121dddf86, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  name: HealthPotion
-  itemCategory: 0
+  name: ItemHealthPotion
+  itemCategory: 2
   itemPrefab: {fileID: 4437335333316217469, guid: 3db1a8de83010ab4b92d256dcc15b94f, type: 3}
   stackable: 1
-  maxSize: 30
-  amountValue: 1
-  effect: 150
+  maxSize: 20
+  amountValue: 2
+  effect: 30
