@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -18,6 +19,13 @@ public class PlayerHealthComponent : HealthComponent
     protected override void Update()
     {
         slider.value = CurrentHealth;
+
+        if(currentHealth < 0)
+        {
+            PlayerPrefs.SetInt("Kills", GameManager.instance.zombiekills);
+            AppEvents.InvokOnMouseCursorEnableEvent(true);
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void PotionHeal(int effect)
@@ -26,5 +34,10 @@ public class PlayerHealthComponent : HealthComponent
         {
             currentHealth = Mathf.Clamp(currentHealth + effect, 0, MaxHealth);
         }
+    }
+
+    public override void Destroy()
+    {
+        //base.Destroy();
     }
 }

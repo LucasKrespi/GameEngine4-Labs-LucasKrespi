@@ -21,7 +21,10 @@ public class ExtendedMagBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<WeaponHolder>().ReturnEquippedWeapon().SetExtendedMagSize();
+            var weapon = other.GetComponent<WeaponHolder>().ReturnEquippedWeapon();
+            if (!weapon) return;
+
+            weapon.SetExtendedMagSize();
             Destroy(gameObject);
         }
     }

@@ -6,6 +6,8 @@ public class ZombieDeadState : ZombieStates
 {
     int movementZHash = Animator.StringToHash("MovementZ");
     int isDeadHash = Animator.StringToHash("isDying");
+
+    bool doOnce = true;
     public ZombieDeadState(ZombieComponent zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
         updateInterval = 0f;
@@ -19,6 +21,8 @@ public class ZombieDeadState : ZombieStates
 
         ownerZombie.zombieAnimator.SetFloat(movementZHash, 0);
         ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
+
+       
     }
 
     public override void Exit()
@@ -26,6 +30,11 @@ public class ZombieDeadState : ZombieStates
         base.Exit();
         ownerZombie.zombieNavMeshAgent.isStopped = false;
         ownerZombie.zombieAnimator.SetBool(isDeadHash, false);
+        if (doOnce)
+        {
+            GameManager.instance.zombiekills++;
+            doOnce = false;
+        }
     }
 
   

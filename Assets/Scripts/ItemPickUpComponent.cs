@@ -49,6 +49,7 @@ public class ItemPickUpComponent : MonoBehaviour
             playerInventory.AddItem(itemInstance, amount);
         }
 
+
         Destroy(gameObject);
     }
 }

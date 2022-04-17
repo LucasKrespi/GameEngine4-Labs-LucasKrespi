@@ -40,7 +40,7 @@ public class WeaponComponent : MonoBehaviour
 
     public WeaponStats weaponStats;
 
-    protected WeaponHolder weaponHolder;
+    public WeaponHolder weaponHolder;
 
     [SerializeField]
     protected ParticleSystem muzzeFlash;
@@ -73,6 +73,7 @@ public class WeaponComponent : MonoBehaviour
         if (!weaponScript)
         {
             weaponStats = weaponScript.weaponStats;
+            weaponStats.totalBullets = weaponHolder.playerController.inventory.FindItem("AK-420").amountValue;
         }
     }
 
@@ -120,16 +121,16 @@ public class WeaponComponent : MonoBehaviour
         }
 
         int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        
         if(bulletsToReload < 0)
         {
-            int tempBullets = (weaponStats.clipSize - weaponStats.bulletsInCLip);
-            weaponStats.bulletsInCLip += tempBullets;
-            weaponStats.totalBullets -= tempBullets;
+            weaponHolder.playerController.inventory.FindItem("AK-420").amountValue -= (weaponStats.clipSize - weaponStats.bulletsInCLip);
+            weaponStats.bulletsInCLip = weaponStats.clipSize;
         }
         else
         {
-            weaponStats.bulletsInCLip = weaponStats.totalBullets;
-            weaponStats.totalBullets = 0;
+            weaponStats.bulletsInCLip = weaponStats.totalBullets - weaponHolder.playerController.inventory.FindItem("AK-420").amountValue;
+            weaponStats.totalBullets = weaponHolder.playerController.inventory.FindItem("AK-420").amountValue = 0;
         }
 
     }

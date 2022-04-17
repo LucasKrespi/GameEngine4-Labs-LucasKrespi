@@ -36,6 +36,6 @@ public class AmmoUi : MonoBehaviour
 
         weaponNameText.text = weaponComponent.weaponStats.waeponName;
         ammoInClipText.text = weaponComponent.weaponStats.bulletsInCLip.ToString();
-        ammoTotalText.text = weaponComponent.weaponStats.totalBullets.ToString();
+        ammoTotalText.text = weaponComponent.weaponHolder.playerController.inventory.FindItem("AK-420").amountValue.ToString(); 
     }
 }

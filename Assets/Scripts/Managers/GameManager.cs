@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
 
-    public bool cursorActive = true;
+    public bool cursorActive = false;
 
+    public int zombiekills = 0;
     void EnableCursor(bool enable)
     {
         if (enable)

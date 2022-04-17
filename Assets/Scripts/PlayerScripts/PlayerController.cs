@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
         inventory = GetComponent<InventoryComponent>();
         weaponHolder = GetComponent<WeaponHolder>();
         playerHealth = GetComponent<HealthComponent>();
+
+        AppEvents.InvokOnMouseCursorEnableEvent(false);
+
     }
 
     public void OnInventory(InputValue valeu)
@@ -31,10 +34,12 @@ public class PlayerController : MonoBehaviour
         if (inInventory)
         {
             inInventory = false;
+            AppEvents.InvokOnMouseCursorEnableEvent(false);
         }
         else
         {
             inInventory = true;
+            AppEvents.InvokOnMouseCursorEnableEvent(true);
         }
         OpenInventory(inInventory);
     }

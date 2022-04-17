@@ -28,6 +28,8 @@ public class InventoryCanvas : GameHUDWidget
         if (PlayerController.inventory.GetItemCount() <= 0) return;
 
         ItemDisplayPanel.PopulatePanel(PlayerController.inventory.GetItemsOfCategory(ItemCategory.None));
+
+        //Cursor.show
     }
 
     public void SelectCategory(ItemCategory category)

@@ -42,7 +42,7 @@ public class ZombieAttackState : ZombieStates
     public override void Update()
     {
         //base.Update();
-
+        if (!followTarget) return;
         Vector3 temp = new Vector3(followTarget.transform.position.x, zombieTransform.position.y, followTarget.transform.position.z);
         
         ownerZombie.transform.LookAt(temp, Vector3.up);
